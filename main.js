@@ -33,7 +33,7 @@ const glados = async () => {
 const notify = async (contents) => {
   const token = process.env.NOTIFY
   if (!token || !contents) return
-  await fetch(`https://luckycola.com.cn/tools/customMail`, {
+  return await fetch(`https://luckycola.com.cn/tools/customMail`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
@@ -50,11 +50,13 @@ const notify = async (contents) => {
       "isTextContent": true,// 邮件内容是否是纯文本形式
       "content": contents,// 邮件内容
     }),
-  })
+  }).then((r) => r.json())
 }
 
 const main = async () => {
-  await notify(await glados())
+  const content = await glados()
+  console.log(content)
+  console.log(await notify(content))
 }
 
 main()
