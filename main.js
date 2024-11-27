@@ -32,12 +32,13 @@ const glados = async () => {
 
 const notify = async (contents) => {
   const token = process.env.NOTIFY
+  const key = process.env.COLEKEY
   if (!token || !contents) return
   return await fetch(`https://luckycola.com.cn/tools/customMail`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
-      "ColaKey": "ze5c0RW9El5Eyj1732690635311lQJaLgpfEez",// 官网获取
+      "ColaKey": key,// 官网获取
       "tomail": "guan810@aliyun.com",// 邮件发给谁?
       "fromTitle": "Glados checkin",// 邮件标题
       "subject": "我是邮件主题",
