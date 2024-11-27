@@ -33,14 +33,22 @@ const glados = async () => {
 const notify = async (contents) => {
   const token = process.env.NOTIFY
   if (!token || !contents) return
-  await fetch(`https://www.pushplus.plus/send`, {
+  await fetch(`https://luckycola.com.cn/tools/customMail`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
-      token,
-      title: contents[0],
-      content: contents.join('<br>'),
-      template: 'markdown',
+      "ColaKey": "ze5c0RW9El5Eyj1732690635311lQJaLgpfEez",// 官网获取
+      "tomail": "guan810@aliyun.com",// 邮件发给谁?
+      "fromTitle": "Glados checkin",// 邮件标题
+      "subject": "我是邮件主题",
+      // 邮件系统授权码，参考[获取文档]:https://blog.csdn.net/qq_48896417/article/details/133903185?spm=1001.2014.3001.5501
+      "smtpCode": token,
+      // 开启授权码对应的授权邮箱
+      "smtpEmail": "18222796870@163.com",
+      // 授权邮箱的类型， 可取值是 qq 或 163 或 126
+      "smtpCodeType": "163",
+      "isTextContent": true,// 邮件内容是否是纯文本形式
+      "content": contents,// 邮件内容
     }),
   })
 }
